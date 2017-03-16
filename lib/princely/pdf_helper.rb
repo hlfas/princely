@@ -8,7 +8,7 @@ module Princely
       # Protect from trying to augment modules that appear
       # as the result of adding other gems.
       return if base != ActionController::Base
-      
+
       base.class_eval do
         alias_method_chain :render, :princely
       end
@@ -48,7 +48,9 @@ module Princely
         :relative_paths => true,
         :server_flag => true,
         :media => nil,
-        :javascript_flag => false
+        :javascript_flag => false,
+        :verbose => false,
+        :insecure => false
       }.merge(options)
 
       prince = Princely::Pdf.new(options.slice(:server_flag, :javascript_flag, :media))

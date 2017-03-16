@@ -2,7 +2,7 @@ require 'timeout'
 
 module Princely
   class Pdf
-    attr_accessor :executable, :style_sheets, :logger, :log_file, :server_flag, :media, :javascript_flag, :timeout
+    attr_accessor :executable, :style_sheets, :logger, :log_file, :server_flag, :media, :javascript_flag, :timeout, :verbose, :insecure
 
     # Initialize method
     #
