@@ -14,7 +14,9 @@ module Princely
         :logger => nil,
         :server_flag => true,
         :media => nil,
-        :javascript_flag => false
+        :javascript_flag => false,
+        :verbose => false,
+        :insecure => false
       }.merge(options)
       @executable = options[:path] ? Princely::Executable.new(options[:path]) : options[:executable]
       @style_sheets = ''
@@ -24,6 +26,8 @@ module Princely
       @media = options[:media]
       @javascript_flag = options[:javascript_flag]
       @timeout = options[:timeout]
+      @verbose = options[:verbose]
+      @insecure = options[:insecure]
     end
 
     # Returns the instance logger or Princely default logger
@@ -52,6 +56,9 @@ module Princely
 
     def executable_options
       options = []
+      options << "--verbose" if @verbose
+      options << "--silent" if !@verbose
+      options << "--insecure" if @insecure
       options << "--input=html"
       options << "--server" if @server_flag
       options << "--log=#{log_file}"
@@ -101,7 +108,7 @@ module Princely
       # Don't spew errors to the standard out...and set up to take IO
       # as input and output
       path << " --media=#{media}" if media
-      path << " --verbose - -o #{output_file}"
+      path << " - -o #{output_file}"
       path << " >> '#{log_file}' 2>> '#{log_file}'" if options[:output_to_log_file]
 
       log_command path if options[:log_command]
