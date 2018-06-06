@@ -57,3 +57,5 @@ The defaults for the render options are as follows:
 ## Resources
 
 * Copyright (c) 2007-2013 Michael Bleigh and Intridea, Inc., released under the MIT license.
+
+
